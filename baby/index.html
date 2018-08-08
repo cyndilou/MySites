@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <link rel="apple-touch-icon" href="images/cubes.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/cubes%20128x128.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/cubes%20256x256.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="images/cubes%20256x256.png">
+
+    <link rel="shortcut icon" type="image/x-icon" href="images/cubes.png" />
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- Bootstrap -->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">-->
+    <link id="themeLink" rel="stylesheet" href="css/girl/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <!-- Handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js" integrity="sha256-+JMHsXRyeTsws/tzbIh5YHQxRdKCuNjmvNcTFtY6DLc=" crossorigin="anonymous"></script>
+
+    <!-- jquery mask input control -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
+
+    <!-- My Icons -->
+    <!--    <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/cdc-icons/my-icons-collection/font/flaticon.css">-->
+    <link rel="stylesheet" type="text/css" href="my-icons-collection/font/flaticon.css">
+
+    <!-- My Styles -->
+    <link rel="stylesheet" type="text/css" href="css/common.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.min.css">
+
+
+    <!-- Sample Data -->
+    <!--<script src="js/sampleData.js"></script>-->
+
+    <!-- My Scripts -->
+    <script src="bundle.js"></script>
+
+    <!-- Google APIs -->
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+
+<body>
+    <!-- Waiting overlay -->
+    <div id="wait" class="overlay">
+        <div class="overlay-content">
+            <div class="fa-3x center-div">
+                <p>
+                    <i class="fas fa-spinner fa-spin"></i>
+                </p>
+            </div>
+            <span id="overlay-text"></span>
+        </div>
+    </div>
+
+    <!-- Background image -->
+    <div id="background" class="background">
+        <img id="backgroundImg" src="">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="navbar-header">
+            <ul class="navbar-nav">
+                <li class="dropdown">
+                    <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="babyIcon" class="" style="font-size: 25px;"></span><span class="ml-2" id="babyName"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item nav-close" href="#" data-baby="girl">
+                            <span id="babyIcon" class="flaticon-baby-girl" style="font-size: 20px;"></span><span class="ml-2" id="babyName">Isabelle</span>
+                        </a>
+                        <a class="dropdown-item nav-close" href="#" data-baby="boy">
+                            <span id="babyIcon" class="flaticon-baby" style="font-size: 20px;"></span><span class="ml-2" id="babyName">Ethan</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item nav-close">
+                    <a class="nav-link" href="#dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item nav-close">
+                    <a class="nav-link" href="#today">Today</a>
+                </li>
+                <li class="nav-item nav-close">
+                    <a class="nav-link" href="#yesterday">Yesterday</a>
+                </li>
+            </ul>
+            <div id="currentUserSection" class="mt-2 mt-md-0">
+                <label class="mr-2 my-2" id="currentUser" for="signOut"></label>
+                <button id="signOut" class="btn btn-outline-primary my-2 my-sm-0" type="button">Sign out</button>
+            </div>
+            <div id="signInSection" class="mt-2 mt-md-0">
+                <button id="signInNav" class="btn btn-primary signIn" type="button">Sign in</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign In Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Welcome</h5>
+                </div>
+                <div class="modal-body">
+                    Welcome to Baby Log. You must sign in with a Google account to use this site.
+                </div>
+                <div class="modal-footer">
+                    <button id="signInModal" class="btn btn-primary signIn" type="button">Sign in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="signedInView">
+        <!-- Add button in lower right corner -->
+        <div class="add-button-div">
+            <button type="button" class="btn btn-primary btn-circle btn-xl" data-toggle="modal" data-target="#addNewModal"><i class="fa fa-plus"></i></button>
+        </div>
+
+        <!-- Modal to add new entry -->
+        <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="addNewModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addNewModalLabel">Add New Entry</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="formEntry">
+                            <form id="myForm" onsubmit="event.preventDefault(); handleFormSubmit(this);">
+                                <fieldset>
+                                    <div class="btn-group btn-group-toggle full-width mb-2" data-toggle="buttons">
+                                        <label class="btn btn-outline-primary btn-section-toggle" data-toggle="collapse" data-target="#bottle-collapse" aria-expanded="false">
+                                            <input type="checkbox" autocomplete="off">
+                                            <span class="flaticon-milk"></span>
+                                        </label>
+                                        <label class="btn btn-outline-primary btn-section-toggle" data-toggle="collapse" data-target="#diaper-collapse" aria-expanded="false">
+                                            <input type="checkbox" autocomplete="off">
+                                            <span class="flaticon-diaper"></span>
+                                        </label>
+                                        <label class="btn btn-outline-primary btn-section-toggle" data-toggle="collapse" data-target="#weight-collapse" aria-expanded="false">
+                                            <input type="checkbox" autocomplete="off">
+                                            <span class="flaticon-scale"></span>
+                                        </label>
+                                        <label class="btn btn-outline-primary btn-section-toggle" data-toggle="collapse" data-target="#bath-collapse" aria-expanded="false">
+                                            <input type="checkbox" autocomplete="off">
+                                            <span class="flaticon-bath"></span>
+                                        </label>
+                                    </div>
+
+                                    <div id="panel-date" class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Date</h6>
+                                            <div class="form-group">
+                                                <input class="form-control full-width" id="date" name="date" type="datetime-local" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="bottle-collapse" aria-expanded="false" class="collapse">
+                                        <div id="panel-bottle" class="card" style="margin-top: 10px">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Feeding</h6>
+
+                                                <div class="accordion" id="accordionExample">
+                                                    <div class="btn-group btn-group-toggle full-width mb-2" data-toggle="buttons">
+                                                        <label class="btn btn-outline-info btn-sm text-black half-width active" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                            <input type="radio" name="feeding-type" id="feeding-bottle" value="Bottle" autocomplete="off" checked /> Bottle
+                                                        </label>
+                                                        <label class="btn btn-outline-info btn-sm half-width" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                            <input type="radio" name="feeding-type" id="feeding-breast" value="Breast" autocomplete="off"> Breast
+                                                        </label>
+                                                        <label class="btn btn-outline-info btn-sm half-width" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                            <input type="radio" name="feeding-type" id="feeding-solids" value="Solids" autocomplete="off"> Solids
+                                                        </label>
+                                                    </div>
+                                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                        <div class="form-group">
+                                                            <label for="amount">Amount (mL):</label>
+                                                            <input class="form-control" id="amount" name="amount" type="number" pattern="\d*" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="type">Type:</label>
+                                                            <select class="form-control" id="type" name="type">
+                                                                <option></option>
+                                                                <option>Breastmilk</option>
+                                                                <option>Formula</option>
+                                                                <option>Milk</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                        <div class="form-group">
+                                                            <label for="amount">Time (min):</label>
+                                                            <input class="form-control" id="time" name="time" type="number" pattern="\d*" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="side">Side:</label>
+                                                            <br>
+                                                            <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
+                                                                <label class="btn btn-outline-info text-black half-width active">
+                                                                    <input type="radio" name="side" id="side-left" value="L" autocomplete="off" checked /> Left
+                                                                </label>
+                                                                <label class="btn btn-outline-info half-width">
+                                                                    <input type="radio" name="side" id="side-right" value="R" autocomplete="off"> Right
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                                        <div class="form-group">
+                                                            <label for="type">Meal:</label>
+                                                            <select class="form-control" id="meal" name="meal">
+                                                                <option></option>
+                                                                <option>Breakfast</option>
+                                                                <option>Lunch</option>
+                                                                <option>Snack</option>
+                                                                <option>Dinner</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vitamin">Vitamin:</label>
+                                                    <br>
+                                                    <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
+                                                        <label class="btn btn-outline-info text-black half-width active">
+                                                            <input type="radio" name="vitamin" id="vitamin-no" value="" autocomplete="off" checked /> No
+                                                        </label>
+                                                        <label class="btn btn-outline-info half-width">
+                                                            <input type="radio" name="vitamin" id="vitamin-yes" value="Yes" autocomplete="off"> Yes
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="diaper-collapse" aria-expanded="false" class="collapse">
+                                        <div id="panel-diaper" class="card" style="margin-top: 10px">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Changing</h6>
+                                                <div class="form-group">
+                                                    <label for="wet">Wet:</label>
+                                                    <br>
+                                                    <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
+                                                        <label class="btn btn-outline-info half-width active">
+                                                            <input type="radio" name="wet" id="wet-no" value="" autocomplete="off" checked /> No
+                                                        </label>
+                                                        <label class="btn btn-outline-info half-width">
+                                                            <input type="radio" name="wet" id="wet-yes" value="Yes" autocomplete="off"> Yes
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="dirty">Dirty:</label>
+                                                    <br>
+                                                    <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
+                                                        <label class="btn btn-outline-info active text-" style="width: 16%">
+                                                            <input type="radio" name="dirty" id="dirty-no" value="" autocomplete="off" checked /> No
+                                                        </label>
+                                                        <label class="btn btn-outline-info" style="width: 15%">
+                                                            <input type="radio" name="dirty" id="dirty-smear" value="Smear" autocomplete="off"> XS
+                                                        </label>
+                                                        <label class="btn btn-outline-info" style="width: 14%">
+                                                            <input type="radio" name="dirty" id="dirty-small" value="Small" autocomplete="off"> S
+                                                        </label>
+                                                        <label class="btn btn-outline-info" style="width: 14%">
+                                                            <input type="radio" name="dirty" id="dirty-medium" value="Medium" autocomplete="off"> M
+                                                        </label>
+                                                        <label class="btn btn-outline-info" style="width: 14%">
+                                                            <input type="radio" name="dirty" id="dirty-large" value="Large" autocomplete="off"> L
+                                                        </label>
+                                                        <label class="btn btn-outline-info">
+                                                            <input type="radio" name="dirty" id="dirty-blowout" value="Blowout" autocomplete="off"> Blowout
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="weight-collapse" aria-expanded="false" class="collapse">
+                                        <div id="panel-weight" class="card" style="margin-top: 10px">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Weight</h6>
+                                                <div class="form-group">
+                                                    <input class="form-control" id="weight" name="weight" type="number" pattern="\d*" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="bath-collapse" aria-expanded="false" class="collapse">
+                                        <div id="panel-bath" class="card" style="margin-top: 10px">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Bath</h6>
+                                                <div class="form-group">
+                                                    <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
+                                                        <label class="btn btn-outline-info half-width active">
+                                                            <input type="radio" name="bath" id="bath-no" value="" autocomplete="off" checked /> No
+                                                        </label>
+                                                        <label class="btn btn-outline-info half-width">
+                                                            <input type="radio" name="bath" id="bath-yes" value="Yes" autocomplete="off"> Yes
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="panel-notes" class="card" style="margin-top: 10px">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Notes</h6>
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class=form-group style="margin-top:15px">
+                                        <input class="btn btn-block btn-lg btn-primary" id="submitBtn" type="submit" value="Submit" />
+                                    </div>
+                                    <div class=form-group style="margin-top:5px">
+                                        <input class="btn btn-block btn-lg btn-link" id="cancelBtn" type="button" value="Cancel" data-dismiss="modal" aria-label="Close" />
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Page -->
+        <div>
+            <div id="dashboard" class="navbar-section">
+                <script id="dashboard-template" type="text/x-handlebars-template">
+                    <div class="card">
+                        <div class="card-body bg-secondary text-white">
+                            <h5 class="card-title">Dashboard</h5>
+                            <h6 class="card-subtitle">
+                            {{#if age}}
+                            <span class="flaticon-cake"></span> {{age}} old
+                            {{/if}}
+                        </h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item low-vertical-padding bg-light">
+                                <div class="row align-items-center bg-light">
+                                    <div class="col-auto">
+                                        <span class="section-icon flaticon-milk"></span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col"><strong>Last ate:</strong></div>
+                                        </div>
+                                        <div class="row section-info text-center bg-white">
+                                            <div class="col">
+                                                {{lastAte.type}} - {{lastAte.time}}
+                                                <br> {{lastAte.timeElapsed}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item low-vertical-padding bg-light">
+                                <div class="row align-items-center bg-light">
+                                    <div class="col-auto">
+                                        <span class="section-icon flaticon-diaper"></span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col"><strong>Last changed:</strong></div>
+                                        </div>
+                                        <div class="row text-center bg-white">
+                                            <div class="col">
+                                                {{lastChanged}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><strong>Last pooped:</strong></div>
+                                        </div>
+                                        <div class="row text-center bg-white">
+                                            <div class="col">
+                                                {{lastPoop}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item low-vertical-padding bg-light">
+                                <div class="row align-items-center bg-light">
+                                    <div class="col-auto">
+                                        <span class="section-icon flaticon-scale"></span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col"><strong>Current weight:</strong></div>
+                                        </div>
+                                        <div class="row text-center bg-white">
+                                            <div class="col">
+                                                {{currentWeight}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><strong>Last weighed:</strong></div>
+                                        </div>
+                                        <div class="row text-center bg-white">
+                                            <div class="col">
+                                                {{lastWeighed}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><strong>Avg weight gain per day:</strong></div>
+                                        </div>
+                                        <div class="row text-center bg-white">
+                                            <div class="col">
+                                                {{avgWeightGain}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item low-vertical-padding bg-light">
+                                <div class="row align-items-center bg-light">
+                                    <div class="col-auto">
+                                        <span class="section-icon flaticon-bath"></span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col"><strong>Last bath:</strong></div>
+                                        </div>
+                                        <div class="row text-center bg-white">
+                                            <div class="col">
+                                                {{lastBath}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </script>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div id="today" class="navbar-section">
+                <script id="today-template" type="text/x-handlebars-template">
+                    {{> dayPartial }}
+                </script>
+
+                <script id="day-partial" type="text/x-handlebars-template">
+                    <div class="card">
+                        <div class="card-body bg-secondary text-white">
+                            <h5 class="card-title">{{title}}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush list-alternate-colors">
+                            {{#each entries}}
+                            <li class="list-group-item low-vertical-padding">
+                                <div class="row">
+                                    <div class="col-auto"><strong>{{this.time}}</strong></div>
+                                    {{#if this.ate}}
+                                    <div class="col-auto">{{this.ate}}</div>
+                                    {{#if this.vitamin}}
+                                    <div class="col-auto"><span class="flaticon-vitamin list-icon"></span></div>
+                                    {{/if}}
+                                    <!-- #if this.vitamin -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    {{/if}}
+                                    <!-- #if this.ate -->
+                                    {{#if this.wet}}
+                                    <div class="col-auto"><span class="flaticon-raindrop list-icon"></span></div>
+                                    {{/if}}
+                                    <!-- #if this.wet -->
+                                    {{#if this.poop}}
+                                    <div class="col-auto"><span class="flaticon-baby-poop list-icon"></span> {{this.poop}}</div>
+                                    {{/if}}
+                                    <!-- #if this.poop -->
+                                    {{#if this.bath}}
+                                    <div class="col-auto"><span class="flaticon-bath list-icon"></span></div>
+                                    {{/if}}
+                                    <!-- #if this.bath -->
+                                </div>
+                                {{#if this.notes}}
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col">{{this.notes}}</div>
+                                </div>
+                                {{/if}}
+                                <!-- #if this.notes -->
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </script>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div id="yesterday" class="navbar-section">
+                <script id="yesterday-template" type="text/x-handlebars-template">
+                    {{> dayPartial }}
+                </script>
+            </div>
+
+            <!--
+        <div id="weight" class="navbar-section">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Weight</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="Medicine" class="navbar-section">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Medicine</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+-->
+        </div>
+
+    </div>
+</body>
+
+</html>
