@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <!-- Handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js" integrity="sha256-+JMHsXRyeTsws/tzbIh5YHQxRdKCuNjmvNcTFtY6DLc=" crossorigin="anonymous"></script>
+
+    <!-- My Styles -->
+    <link href="css/common.css" rel="stylesheet">
+
+    <script>
+        var DEBUG = true;
+        var DELAY = 1000; // ms
+
+        // Prevent forms from submitting.
+        function preventFormSubmit() {
+            console.log("preventFormSubmit");
+
+            var forms = document.querySelectorAll('form');
+            for (var i = 0; i < forms.length; i++) {
+                forms[i].addEventListener('submit', function(event) {
+                    console.log("submitEvent");
+
+                    event.preventDefault();
+                });
+            }
+        }
+        window.addEventListener('load', preventFormSubmit);
+
+        $(function() {
+            console.log("Loading page");
+        });
+
+        function handleFormSubmit(formObject) {
+            $("#submitBtn").val("Submitting...");
+            openOverlay();
+
+            console.log("running script");
+
+            if (!DEBUG) {
+                google.script.run
+                    .withSuccessHandler(onSuccess)
+                    .withFailureHandler(onFailure)
+                    .submitForm(formObject);
+            } else {
+                setTimeout(function() {
+                    onSuccess();
+                }, DELAY);
+            }
+        }
+
+        function onFailure(error) {
+            console.log("onFailure");
+            console.log(error);
+
+            closeOverlay();
+            alert(error.message);
+        };
+
+        function onSuccess(message) {
+            console.log("onSuccess");
+
+            if (message !== undefined) {
+                console.log(message);
+            }
+
+            closeOverlay();
+        };
+
+        function openOverlay() {
+            $("#wait").css("display", "block");
+        }
+
+        function closeOverlay() {
+            $("#wait").css("display", "none");
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <!-- Spinner -->
+    <div id="wait" class="overlay">
+        <div class="overlay-content">
+            <div class="fa-3x center-div">
+                <p>
+                    <i class="fas fa-spinner fa-spin"></i>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header" style="margin-top: 20px">
+        <div class="container">
+            <h2>Page Title</h2>
+        </div>
+    </div>
+
+    <div class="container wrap">
+        <div class="container-fluid">
+            <form onsubmit="handleFormSubmit(this)">
+                <div class="form-group">
+                    <input class="btn btn-primary btn-block btn-lg" name="submit" type="submit" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

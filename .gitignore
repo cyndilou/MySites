@@ -4,3 +4,7 @@ jspm_packages/
 
 # Optional npm cache directory
 .npm
+
+# Sensitive files
+keys.js
+client_secret.json
