@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+    <!-- iOS Web App Stuff -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="images/cubes.png">
     <link rel="apple-touch-icon" sizes="152x152" href="images/cubes%20128x128.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/cubes%20256x256.png">
@@ -153,7 +155,7 @@
                     </div>
                     <div class="modal-body">
                         <div id="formEntry">
-                            <form id="myForm" onsubmit="event.preventDefault(); handleFormSubmit(this);">
+                            <form id="myForm">
                                 <fieldset>
                                     <div class="btn-group btn-group-toggle full-width mb-2" data-toggle="buttons">
                                         <label class="btn btn-outline-primary btn-section-toggle" data-toggle="collapse" data-target="#bottle-collapse" aria-expanded="false">
@@ -225,10 +227,10 @@
                                                             <br>
                                                             <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
                                                                 <label class="btn btn-outline-info text-black half-width active">
-                                                                    <input type="radio" name="side" id="side-left" value="L" autocomplete="off" checked /> Left
+                                                                    <input type="radio" name="side" id="side-left" value="left" autocomplete="off" checked /> Left
                                                                 </label>
                                                                 <label class="btn btn-outline-info half-width">
-                                                                    <input type="radio" name="side" id="side-right" value="R" autocomplete="off"> Right
+                                                                    <input type="radio" name="side" id="side-right" value="right" autocomplete="off"> Right
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -366,10 +368,9 @@
                         <div class="card-body bg-secondary text-white">
                             <h5 class="card-title">Dashboard</h5>
                             <h6 class="card-subtitle">
-                            {{#if age}}
-                            <span class="flaticon-cake"></span> {{age}} old
-                            {{/if}}
-                        </h6>
+                                {{#if age}}
+                                <span class="flaticon-cake"></span> {{age}} old {{/if}}
+                            </h6>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item low-vertical-padding bg-light">
