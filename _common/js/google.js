@@ -51,8 +51,7 @@ GoogleAPIWrapper.runScript = function (functionName, parameters, successCallback
         'scriptId': GoogleAPIWrapper.SCRIPT_ID,
         'resource': {
             'function': functionName,
-            'parameters': parameters,
-            'devMode': true
+            'parameters': parameters
         }
     }).then(function (resp) {
         var result = resp.result;
