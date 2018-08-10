@@ -157,7 +157,7 @@
                     </div>
                     <div class="modal-body">
                         <div id="formEntry">
-                            <form id="myForm">
+                            <form id="myForm" novalidate>
                                 <fieldset>
                                     <div class="btn-group btn-group-toggle full-width mb-2" data-toggle="buttons">
                                         <label class="btn btn-outline-primary btn-section-toggle" data-toggle="collapse" data-target="#bottle-collapse" aria-expanded="false">
@@ -229,10 +229,10 @@
                                                             <br>
                                                             <div class="btn-group btn-group-toggle full-width" data-toggle="buttons">
                                                                 <label class="btn btn-outline-info text-black half-width active">
-                                                                    <input type="radio" name="side" id="side-left" value="left" autocomplete="off" checked /> Left
+                                                                    <input type="radio" name="side" id="side-left" value="L" autocomplete="off" checked /> Left
                                                                 </label>
                                                                 <label class="btn btn-outline-info half-width">
-                                                                    <input type="radio" name="side" id="side-right" value="right" autocomplete="off"> Right
+                                                                    <input type="radio" name="side" id="side-right" value="R" autocomplete="off"> Right
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -315,7 +315,7 @@
                                             <div class="card-body">
                                                 <h6 class="card-title">Weight</h6>
                                                 <div class="form-group">
-                                                    <input class="form-control" id="weight" name="weight" type="number" pattern="\d*" />
+                                                    <input class="form-control" id="weight" name="weight" type="text" pattern="\d*" />
                                                 </div>
                                             </div>
                                         </div>
